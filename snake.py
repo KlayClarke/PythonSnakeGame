@@ -19,8 +19,22 @@ class Snake:
             self.snake.append(new_segment)
 
     def move(self):
+
         for seg_num in range(len(self.snake) - 1, 0, -1):
             new_x_cord = self.snake[seg_num - 1].xcor()
             new_y_cord = self.snake[seg_num - 1].ycor()
             self.snake[seg_num].goto(x=new_x_cord, y=new_y_cord)
         self.snake[0].forward(move_distance)
+
+    def up(self):
+        self.snake[0].seth(90)
+
+    def down(self):
+        self.snake[0].seth(270)
+
+    def left(self):
+        self.snake[0].seth(180)
+
+    def right(self):
+        self.snake[0].seth(0)
+
