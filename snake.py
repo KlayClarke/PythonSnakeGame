@@ -2,6 +2,10 @@ from turtle import Turtle
 
 starting_positions = [(0, 0), (-20, 0), (-40, 0)]
 move_distance = 20
+UP = 90.0
+DOWN = 270.0
+LEFT = 180.0
+RIGHT = 0.0
 
 
 class Snake:
@@ -9,6 +13,8 @@ class Snake:
     def __init__(self):
         self.snake = []
         self.create_snake()
+        self.head = self.snake[0]
+
 
     def create_snake(self):
         for position in starting_positions:
@@ -24,17 +30,24 @@ class Snake:
             new_x_cord = self.snake[seg_num - 1].xcor()
             new_y_cord = self.snake[seg_num - 1].ycor()
             self.snake[seg_num].goto(x=new_x_cord, y=new_y_cord)
-        self.snake[0].forward(move_distance)
+        self.head.forward(move_distance)
 
     def up(self):
-        self.snake[0].seth(90)
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
+        print(self.head.heading())
 
     def down(self):
-        self.snake[0].seth(270)
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
+        print(self.head.heading())
 
     def left(self):
-        self.snake[0].seth(180)
+        if self.head.heading() != RIGHT:
+            return self.head.seth(LEFT)
+        print(self.head.heading())
 
     def right(self):
-        self.snake[0].seth(0)
-
+        if self.head.heading() != LEFT:
+            return self.head.seth(RIGHT)
+        print(self.head.heading())
