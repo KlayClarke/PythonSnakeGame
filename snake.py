@@ -52,5 +52,12 @@ class Snake(Turtle):
             return self.head.seth(RIGHT)
         print(self.head.heading())
 
-    def snake_position_reset(self):
-        self.goto(x=0, y=0)
+    def add_segment(self, position):
+        new_segment = Turtle('square')
+        new_segment.color('white')
+        new_segment.penup()
+        new_segment.goto(position)
+        self.snake.append(new_segment)
+
+    def extend(self):
+        self.add_segment(self.snake[-1].position())
