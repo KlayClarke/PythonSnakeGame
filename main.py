@@ -1,7 +1,8 @@
-import time
-import turtle
-from turtle import Turtle, Screen
+from turtle import Screen
 from snake import Snake
+from food import Food
+import score
+import time
 
 my_screen = Screen()
 my_screen.setup(width=600, height=600)
@@ -10,6 +11,8 @@ my_screen.title('Python Snake Game')
 my_screen.tracer(0)
 
 new_snake = Snake()
+new_food = Food()
+new_score = score.Score()
 
 my_screen.listen()
 my_screen.onkey(new_snake.up, key='Up')
@@ -19,13 +22,19 @@ my_screen.onkey(new_snake.right, key='Right')
 
 game_is_on = True
 
+score = 0
+
 while game_is_on:
     my_screen.update()
     time.sleep(0.1)
     new_snake.move()
 
-
-
+    # detect contact between snake head and food
+    if new_snake.head.distance(new_food) < 15:
+        score += 1
+        new_food.refresh()
+        new_score.clear()
+        new_score.update_score(score)
 
 
 my_screen.exitonclick()
