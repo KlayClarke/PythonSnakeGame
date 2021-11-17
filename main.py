@@ -22,20 +22,16 @@ my_screen.onkey(new_snake.right, key='Right')
 
 game_is_on = True
 
-score = 0
-
 while game_is_on:
     my_screen.update()
     time.sleep(0.1)
     new_snake.move()
     new_score.clear()
-    new_score.update_score(score)
-
+    new_score.update_score()
 
     # detect contact between snake head and food
     if new_snake.head.distance(new_food) < 15:
-        score += 1
+        new_score.increase_score()
         new_food.refresh()
-
 
 my_screen.exitonclick()
