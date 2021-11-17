@@ -1,4 +1,4 @@
-from turtle import Turtle
+from turtle import Turtle, home
 
 starting_positions = [(0, 0), (-20, 0), (-40, 0)]
 move_distance = 20
@@ -8,12 +8,13 @@ LEFT = 180.0
 RIGHT = 0.0
 
 
-class Snake:
+class Snake(Turtle):
 
     def __init__(self):
         self.snake = []
         self.create_snake()
         self.head = self.snake[0]
+
 
     def create_snake(self):
         for position in starting_positions:
@@ -50,3 +51,6 @@ class Snake:
         if self.head.heading() != LEFT:
             return self.head.seth(RIGHT)
         print(self.head.heading())
+
+    def snake_position_reset(self):
+        self.goto(x=0, y=0)
