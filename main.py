@@ -1,7 +1,7 @@
-from turtle import Screen, home
-from snake import Snake
+from turtle import Screen
 from food import Food
 import score
+import snake
 import time
 
 my_screen = Screen()
@@ -10,9 +10,10 @@ my_screen.bgcolor('black')
 my_screen.title('Python Snake Game')
 my_screen.tracer(0)
 
-new_snake = Snake()
+new_snake = snake.Snake()
 new_food = Food()
 new_score = score.Score()
+snake_array = new_snake.snake_body
 
 my_screen.listen()
 my_screen.onkey(new_snake.up, key='Up')
@@ -35,15 +36,19 @@ while game_is_on:
         new_food.refresh()
         new_snake.extend()
 
+    # detect contact between snake head and snake body
+    for segment in snake_array:
+        if segment == new_snake.head:
+            pass
+        elif new_snake.head.distance(segment) < 10:
+            game_is_on = False
+            new_score.game_over()
+
     # detect collision with wall
     if new_snake.head.xcor() < -280 or new_snake.head.xcor() > 280 \
             or new_snake.head.ycor() < -280 or new_snake.head.ycor() > 280:
-        print('collision with wall')
-        # new_score.reset_score()
-        # new_food.refresh()
         game_is_on = False
         new_score.clear()
         new_score.game_over()
-
 
 my_screen.exitonclick()
