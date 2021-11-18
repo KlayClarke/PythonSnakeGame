@@ -37,17 +37,17 @@ while game_is_on:
         new_snake.extend()
 
     # detect collision with wall
-    if new_snake.head.xcor() < -280 or new_snake.head.xcor() > 280 \
+    if new_snake.head.xcor() < -295 or new_snake.head.xcor() > 295 \
             or new_snake.head.ycor() < -280 or new_snake.head.ycor() > 280:
         new_snake.reset_snake()
         new_score.update_score()
-        new_score.reset()
+        new_score.reset_game()
 
     # detect contact between snake head and snake body
     for segment in snake_array[1:]:
         if new_snake.head.distance(segment) < 10:
             new_snake.reset_snake()
             new_score.update_score()
-            new_score.reset()
+            new_score.reset_game()
 
 my_screen.exitonclick()
