@@ -12,14 +12,17 @@ class Score(Turtle):
         self.color('white')
         self.speed('fastest')
         self.score = 0
+        self.high_score = 0
 
     def increase_score(self):
         self.score += 1
 
     def update_score(self):
-        self.write(f'Score: {self.score}', move=False, align=alignment, font=font)
+        self.clear()
+        self.write(f'Score: {self.score}' f'  High Score: {self.high_score}', move=False, align=alignment, font=font)
 
-    def game_over(self):
-        self.goto(x=0, y=0)
-        self.write(f'GAME OVER. FINAL SCORE: {self.score}', move=False, align='center', font=font )
-
+    def reset(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+        self.score = 0
+        self.update_score()
