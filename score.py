@@ -12,17 +12,20 @@ class Score(Turtle):
         self.color('white')
         self.speed('fastest')
         self.score = 0
-        self.high_score = 0
+        with open('data.txt', mode='r') as data:
+            self.high_score = int(data.read())
 
     def increase_score(self):
         self.score += 1
 
     def update_score(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+            with open('data.txt', mode='w') as data:
+                data.write(f'{self.high_score}')
         self.clear()
         self.write(f'Score: {self.score}' f'  High Score: {self.high_score}', move=False, align=alignment, font=font)
 
-    def reset(self):
-        if self.score > self.high_score:
-            self.high_score = self.score
+    def reset_game(self):
         self.score = 0
         self.update_score()
